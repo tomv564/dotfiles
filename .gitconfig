@@ -1,0 +1,5 @@
+[user]
+	name = Tom van Ommeren
+	email = tom.vanommeren@gmail.com
+[push]
+	default = simple
