@@ -1,0 +1,44 @@
+GIT_PS1_SHOWDIRTYSTATE=1
+USER=USERNAME
+
+set_prompts() {
+
+	local reset="\e[0m"
+	local cyan="\e[1;36m"
+	local green="\e[1;32m"
+	local orange="\e[1;33m"
+	local white="\e[1;37m"
+	local yellow="\e[1;33m"
+
+	if [[ "$USER" == "root" ]]; then
+	    userStyle="\[$bold$red\]"
+	else
+	    userStyle="\[$orange\]"
+	fi
+
+	# connected via ssh
+	if [[ "$SSH_TTY" ]]; then
+	    hostStyle="\[$bold$red\]"
+	else
+	    hostStyle="\[$yellow\]"
+	fi
+
+
+	PS1="\[\033]0;${PWD//[^[:ascii:]]/?}\007\]" # terminal title is current working directory
+	PS1+="\n"
+	PS1+="\[$userStyle\]\u" # username
+	PS1+="\[$reset\] at "
+	PS1+="\[$hostStyle\]\h" # host
+	PS1+="\[$reset\]: "
+	PS1+="\[$green\]\w"
+	PS1+="\[$reset\] on"
+	PS1+="\[$cyan\]$(__git_ps1)"
+	PS1+="\n"
+    PS1+="\[$reset$white\]\$ \[$reset\]" # $ (and reset color)
+
+	export GIT_PS1_SHOWDIRTYSTATE PS1
+
+}
+
+set_prompts
+unset set_prompts
