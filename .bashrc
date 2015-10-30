@@ -10,3 +10,6 @@
 
 # windows prompt script needs to be merged with .bash_prompt
 [[ -f "$HOME/.msys_prompt" ]] && source "$HOME/.msys_prompt"
+
+# autojump
+[[ -f "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
